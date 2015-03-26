@@ -14,7 +14,7 @@ masterMind =  randomNumbers 4 >>= game 0 where
 		putStrLn $ show round ++ ". Versuch:"
 		ln <- getLine >>= return . words
 		if length ln /= 4 then invalid round numbers
-		else case sequence (map (\x->validNumber . (readMaybe x :: Maybe Integer)) ln) of
+		else case sequence (map (\x->validNumber (readMaybe x :: Maybe Integer)) ln) of
 			Nothing -> invalid round numbers
 			Just xs -> if checkWin xs numbers then putStrLn "Player wins" 
 					else putStrLn (show (checkPos xs numbers)) >> game (round+1)numbers
